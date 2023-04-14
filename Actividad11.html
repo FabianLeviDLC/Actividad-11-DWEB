@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actvidad 11 Diseño de Apps Web</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app">
+    <h4>Actividad 11 Diseño de Apps Web, Fabian Levi</h4>
+    <h1 v-if="(Oportunidades == 3)"> Ya realizaste tus 3 intentos </h1>
+    <h1 v-else="">Oportunidades: {{Oportunidades}}</h1>
+    <h2>Jugador 1: {{jugador1}}</h2>
+    <h2>Jugador 2: {{jugador2}}</h2>
+
+    <h2>El Ganador es: {{ganador}}</h2>
+
+    <input type="button" v-on:click="jugar()" :disabled="Oportunidades==3"  value="Jugar">
+    <input type="button" v-on:click="reiniciar()" :disabled="Oportunidades!=3"  value="Reiniciar">
+
+</div>
+
+<script type="text/javascript">
+  
+  var app = new Vue({
+  el: '#app',
+  data: {
+    jugador1:0,
+    jugador2:0,
+    ganador:"-",
+    Oportunidades: 0
+  
+  },
+  methods: {
+    jugar: function(event){
+
+        this.jugador1 = Math.round(Math.random()*20);
+        this.jugador2 = Math.round(Math.random()*20);
+
+        if(this.jugador1 == this.jugador2){
+            mensaje = "Hay un empate"
+        }
+        else if (this.jugador1 > this.jugador2){
+            mensaje = "Jugador 1 Gana"
+        }else{
+            mensaje = "Jugador 2 Gana"
+        }
+
+        this.ganador = mensaje
+        this.Oportunidades++;
+
+    },
+
+    reiniciar: function(event){
+        this.jugador1 = 0,
+        this.jugador2 = 0,
+        this.Oportunidades = 0,
+        this.ganador = "-"
+
+    }
+    
+  },
+
+})
+
+</script>
+
+</body>
+</html>
